@@ -1,12 +1,12 @@
 {
-    "name": "taghwo/phone-number-validator-formatter-for-nigerian-phone-numbers",
-    "type": "library",
-    "description": "This handles backend validations and formatting of Nigerian phone numbers",
+    "name": "taghw/minimvc",
+    "type": "project",
+    "description": "This is a PHP mvc framework with routing",
     "keywords": [
         "taghwo",
-        "phone-number-validator-formatter-for-nigerian-phone-numbers"
+        "mini mvc"
     ],
-    "homepage": "https://github.com/taghwo/nigerian-phone-number-validator-formatters",
+    "homepage": "https://github.com/taghwo/minimvc",
     "license": "MIT",
     "authors": [
         {

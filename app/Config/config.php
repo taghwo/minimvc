@@ -1,5 +1,5 @@
 <?php
-$dotenv = \Dotenv\Dotenv::createImmutable(realpath('.'));
+$dotenv = \Dotenv\Dotenv::createImmutable(APP_ROOT('.'));
 $dotenv->load();
 
 if (!function_exists('config')) {

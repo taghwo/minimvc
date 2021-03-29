@@ -13,20 +13,23 @@ Clone repository
 https://github.com/taghwo/minimvc.git
 ```
 ```sh
+Run
 composer install
 ```
 
 ```sh
- Run composer dump-autoload
+ Run
+ composer dump-autoload
  ```
 
 ```sh
-Create an .env file in the root of of the app, copy and paste .env.example placeholders
+Create a .env file in the root of of the app, copy and paste .env.example placeholders
 Update your app credentials in .env
 ```
 
 ```sh
 Modify boom file permissions
+Run
 chmod +x boom
 ```
 ```sh

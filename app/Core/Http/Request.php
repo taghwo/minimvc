@@ -2,6 +2,9 @@
 
 namespace App\Core\Http;
 
+use App\Core\Application;
+use App\Core\Exceptions\GlobalException;
+
 class Request
 {
     /**
@@ -37,6 +40,24 @@ class Request
         array_shift($params);
         return  $params;
     }
+
+    public function session(){
+        return Application::$app->session;
+    }
+    /**
+     * Get server request method
+     *
+     * @return string
+     */
+    public static function getBearer()
+    {
+        $token = explode(" ", $_SERVER['HTTP_AUTHORIZATION']);
+        if(isset($token[1])){
+            return  $token[1];
+        }
+        throw new GlobalException("Authorization bearer token not found in HTTP_AUTHORIZATION  header");
+    }
+
     public function getMethod()
     {
         return strtolower($_SERVER['REQUEST_METHOD']);

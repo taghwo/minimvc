@@ -4,6 +4,7 @@ namespace App\Core\Http;
 
 use App\Core\Bus\Hash;
 use App\Core\Bus\Session;
+use App\Core\Exceptions\GlobalException;
 use App\Models\User;
 
 trait Authenticator
@@ -23,7 +24,7 @@ trait Authenticator
      *
      * @var string
      */
-    protected $invalidCredential = 'Invalid credentials';
+    protected $invalidCredentialMessage = 'Invalid credentials';
     /**
      *
      * @var integer
@@ -44,7 +45,7 @@ trait Authenticator
             unset($this->requestUser->password);
             return $this->requestUser;
         } else {
-            die(Response::json(['status'=>'failed','message'=>$this->invalidCredential], $this->invalidCredentialCode));
+            throw new GlobalException($this->invalidCredentialMessage, $this->invalidCredentialCode);
         }
     }
 
@@ -87,6 +88,6 @@ trait Authenticator
             return;
         }
 
-        die(Response::json(['status'=>'failed','message'=>$this->invalidCredential], $this->invalidCredentialCode));
+        throw new GlobalException($this->invalidCredentialMessage, $this->invalidCredentialCode);
     }
 }

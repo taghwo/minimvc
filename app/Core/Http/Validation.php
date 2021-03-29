@@ -51,7 +51,7 @@ class Validation extends Rules
             $method->setAccessible(true);
             $method->invokeArgs($this, [$fieldKey, $fieldValue, $ruleValue]);
         }catch(ReflectionException $e){
-            die($e);
+           echo $e;
         }
     }
 

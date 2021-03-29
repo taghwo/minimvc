@@ -2,8 +2,8 @@
 
 namespace App\Core\Bus;
 
+use App\Core\Exceptions\GlobalException;
 use App\Core\Http\Request;
-use App\Core\Http\Response;
 use RuntimeException;
 
 class Router
@@ -13,10 +13,9 @@ class Router
     protected $path;
     protected $paths;
     protected $route;
-    public function __construct(Request $request, Response $response)
+    public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->response = $response;
     }
 
     public function get($path, $callback)
@@ -50,13 +49,8 @@ class Router
     private function loadApp()
     {
         if (is_array($this->callback)) {
-            try {
-                $this->callback[0] = new $this->callback[0]();
-            } catch (\Exception $e) {
-                die("{$this->callback[1]} method does not exist in {$this->callback[0]}");
-            }
-        }
-
-        return call_user_func($this->callback, $this->request);
+            $this->callback[0] = new $this->callback[0]();
+         }
+          return call_user_func($this->callback, $this->request);
     }
 }

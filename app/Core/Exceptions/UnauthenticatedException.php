@@ -1,14 +1,19 @@
 <?php
 namespace App\Core\Exceptions;
 
-use Exception;
-use Throwable;
-class UnauthenticatedException extends Exception implements Throwable{
+use App\Core\Http\Response;
+
+class UnauthenticatedException extends BaseException{
     protected $code = 401;
-    protected $message;
-    public function __construct()
+    protected $message = 'You are not logged in';
+
+
+    public function render()
     {
-        http_response_code(401);
-        $this->message = sprintf('You are not logged in');
+        return Response::json([
+            'status' => "failed",
+            "meesage" => $this->message
+        ]);
     }
+
 }

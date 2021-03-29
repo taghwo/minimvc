@@ -2,7 +2,8 @@
 
 namespace App\Core\Http;
 
-use App\Core\Bus\Session;
+use App\Core\Application;
+use App\Core\Exceptions\GlobalException;
 
 abstract class BaseController
 {
@@ -13,10 +14,20 @@ abstract class BaseController
      */
     public function session()
     {
-        $session = new Session();
-        return $session;
+        return Application::$app->session;
     }
 
+    protected function middleware($middleware){
+
+        $middlewareList = Application::$app->kernel::globalMiddleware();
+
+        if(isset($middlewareList[$middleware])){
+
+            $class = new $middlewareList[$middleware][0]();
+
+            return call_user_func([$class, 'handle'],Application::$app->request);
+        }
+    }
     /**
      * Response ok
      *
@@ -48,11 +59,11 @@ abstract class BaseController
     /**
      * Response error
      *
-     * @param mixed $data
+     * @param mixed $msg
      * @param integer $code
      * @return json
      */
-    public function response_error(string $msg, $code=417)
+    public function response_error($msg, $code=417)
     {
         return Response::json([
             'status' => 'failed',
@@ -100,7 +111,7 @@ abstract class BaseController
         if (file_exists("../app/Views/{$view}.php")) {
             require_once "../app/Views/{$view}.php";
         } else {
-            die('View{$view}.php was not found, please create it');
+            throw new GlobalException('View{$view}.php was not found, please create it');
         }
     }
 }

@@ -43,18 +43,67 @@ cd public && php -S 127.0.0.1:8000
 ```
 
  # Usage
+
+ # Authentication
+```sh
+Authentication is handled with bearer tokens
+When visiting endpoint that needs authentication pass the access token
+that was received during registration or login as bearer in your authorization header.
+
+## Example
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+```
+
  # endpoints
 ```sh
-Currently all enpoints are in route.php file
+ All npoints reside in route.php file
 ```
 
 ```sh
 During registration and login submitted data will be validated
 ```
 
-# NOTE
 ```sh
-Authentication is based on session for now
+Registration sample payload looks like
+{
+	"name":"mongoya T",
+	"email":"mits@f.com",
+	"password":"password"
+}
+
+Login sample payload
+{
+  "email":"mits@f.com",
+  "password":"password"
+}
+```
+
+```sh
+Login response payload 
+{
+  "status": "success",
+  "data": {
+    "user": {
+      "id": "79",
+      "name": "mongoya",
+      "email": "mit@f.com"
+    },
+    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJNVkNBUFAiLCJhdWQiOiJVU0VSIiwiaWF0IjoxNjE3MDQyNDU5LCJuYmYiOjE2MTcwNDI0NjksImV4cCI6MTYxNzA0NjA1OSwiZGF0YSI6eyJpZCI6Ijc5IiwibmFtZSI6Im1vbmdveWEifX0.QzreOSwa6aUe3LAhtwbm7m4BXotez5BqGbWssh6xksI",
+    "tokenType": "Bearer"
+  }
+}
+```
+
+```sh
+Currently logged in user response payload
+{
+  "status": "success",
+  "data": {
+    "id": "79",
+    "name": "mongoya",
+    "email": "mit@f.com"
+  }
+}
 ```
 
 ```sh
@@ -65,8 +114,4 @@ Status code returned include
 4: 200 for ok
 5: 201 for created
 6: 417 for unexpected error
-```
-
-```sh
-Successful request will return json object
 ```

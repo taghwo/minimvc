@@ -1,9 +1,11 @@
 <?php
-namespace App\Controller\Api;
+namespace App\Controllers\Api;
 
 use App\Core\Bus\Hash;
+use App\Core\Exceptions\ValidationException;
 use App\Core\Http\BaseController;
 use App\Core\Http\Authenticator;
+use App\Core\Http\JWTToken;
 use App\Core\Http\Request;
 use App\Core\Http\Validation;
 use App\Models\User;
@@ -30,6 +32,28 @@ class RegisterController extends BaseController
      */
     public function register(Request $request)
     {
+        $validatedAttr = $this->validateData($request);
+
+        try {
+            $user = $this->user->new($validatedAttr);
+
+            $this->loginUser($user);
+
+            $payload = [
+                'user' => $user,
+                'accessToken' => JWTToken::createUserToken($user),
+                'tokenType' => 'Bearer'
+            ];
+
+            return $this->response_created($payload, "Successfully registered");
+
+        } catch (\Throwable $th) {
+
+            return $this->response_error($th->getMessage(), $th->getCode());
+        }
+    }
+
+    private function validateData($request){
         $validator = new Validation();
         $validator->make(
             [
@@ -43,20 +67,14 @@ class RegisterController extends BaseController
                 "password" => ['required','min' => 6,'max' => 15,'string']
             ]
         );
+
         if ($validator->fails()) {
-            return $this->response_error($validator->getErrorMessages(), 400);
+            throw new ValidationException($validator->getErrorMessages());
         }
 
         $validatedAttr = $validator->validated();
 
-        $validatedAttr ['password'] = Hash::make($validatedAttr ['password']);
-
-        try {
-            $user = $this->user->new($validatedAttr);
-            $this->loginUser($user);
-            return $this->response_created($user, "Successfully registered");
-        } catch (\Throwable $th) {
-            return $this->response_error($th->getMessage(), $th->getCode());
-        }
+        $validatedAttr['password'] = Hash::make($validatedAttr ['password']);
+        return  $validatedAttr;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\Api;
+namespace App\Controllers\Api;
 
 use App\Core\Http\Authenticator;
 use App\Core\Http\BaseController;
@@ -15,10 +15,10 @@ class AuthenticationController extends BaseController
      */
     public function currentuser()
     {
-        if ($this->session()->check()) {
-            return $this->response_ok($this->session()->user());
-        }
-        return $this->response_error('Sorry you are not logged in', 401);
+        $this->middleware('auth');
+
+        return $this->response_ok($this->session()->user());
+
     }
 
     /**

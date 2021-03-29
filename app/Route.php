@@ -1,8 +1,8 @@
 <?php
 
-use App\Controller\Api\AuthenticationController;
-use App\Controller\Api\LoginController;
-use App\Controller\Api\RegisterController;
+use App\Controllers\Api\AuthenticationController;
+use App\Controllers\Api\LoginController;
+use App\Controllers\Api\RegisterController;
 
 $app->router->get('/', function () {
     return 'home page';

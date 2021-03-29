@@ -3,8 +3,10 @@
 namespace App\Core;
 
 use App\Core\Bus\Router;
+use App\Core\Bus\Session;
 use App\Core\Http\Request;
 use App\Core\Http\Response;
+use App\Middlewares\Kernel;
 
 class Application
 {
@@ -24,11 +26,32 @@ class Application
      */
     public $request;
 
+    /**
+     *
+     * @var object
+     */
+    public $kernel;
+
+    /**
+     *
+     * @var object
+     */
+    public $session;
+
+    /**
+     *
+     * @var object
+     */
+    public static  $app;
+
     public function __construct()
     {
         $this->request = new Request();
         $this->response = new Response();
-        $this->router = new Router($this->request, $this->response);
+        $this->session = new Session();
+        self::$app = $this;
+        $this->kernel = new Kernel();
+        $this->router = new Router($this->request);
     }
 
     /**
@@ -40,4 +63,5 @@ class Application
     {
         echo $this->router->resolve();
     }
+
 }

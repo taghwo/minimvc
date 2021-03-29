@@ -60,11 +60,11 @@ Authentication is based on session for now
 ```sh
 Status code returned include
 1: 401 for unauthenticated response
-2: 400 for for invalid credentials
-3: 500 for for server error
-4: 200 for for ok
-5: 201 for for created
-6: 417 for for unexpected error
+2: 400 for invalid credentials
+3: 500 for server error
+4: 200 for ok
+5: 201 for created
+6: 417 for unexpected error
 ```
 
 ```sh

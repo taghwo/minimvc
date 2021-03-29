@@ -38,7 +38,7 @@ trait Authenticator
     {
         $user = new User();
         $user->hidden([]);
-        $user  = $user->getByColumn('email', $value);
+        $user  = $user->getByColumn($this->validationColumn, $value);
 
         if ($user) {
             $this->requestUser = $user;

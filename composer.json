@@ -1,0 +1,50 @@
+{
+    "name": "taghwo/phone-number-validator-formatter-for-nigerian-phone-numbers",
+    "type": "library",
+    "description": "This handles backend validations and formatting of Nigerian phone numbers",
+    "keywords": [
+        "taghwo",
+        "phone-number-validator-formatter-for-nigerian-phone-numbers"
+    ],
+    "homepage": "https://github.com/taghwo/nigerian-phone-number-validator-formatters",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Taghwo Millionaire O",
+            "email": "taghwomills@gmail.com",
+            "homepage": "https://ninetofive.com.ng",
+            "role": "Owner"
+        }
+    ],
+    "require": {
+        "php": "~7.3",
+        "vlucas/phpdotenv": "^5.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : ">=8.0"
+    },
+    "autoload": {
+        "files":["app/Helper.php","app/Config/config.php"],
+        "psr-4": {
+            "App\\": "app"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\": "app"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/vendor/autoload.php';
+use App\Core\Bus\Command;
+use App\Migrations;
+
+$command = new Command();
+
+$command->register("migrate", function ($argv) {
+    return Migrations::run($argv[2]);
+});
+
+$command->register("help", function () {
+    echo "Usage: To migrate a table, please run , php ./boom migrate `tableName`";
+});
+
+$command->fire($argv);

@@ -6,7 +6,7 @@ use App\Core\Bus\Database;
 abstract class BaseModel
 {
     protected $stmt;
-    protected $dbInstance;
+    protected $db;
     protected $hidden = [];
 
     public function __construct()

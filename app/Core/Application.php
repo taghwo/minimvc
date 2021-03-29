@@ -9,6 +9,8 @@ use App\Core\Http\Response;
 class Application
 {
     public $router;
+    public $response;
+    public $request;
     public function __construct()
     {
         $this->request = new Request();

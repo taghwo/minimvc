@@ -10,11 +10,6 @@ class LoginController extends BaseController
 {
     use Authenticator;
 
-    public function about()
-    {
-        return $this->view('pages/index', ['pageTitle'=>"about us"]);
-    }
-
     public function login(Request $request)
     {
         $validator = new Validation();

@@ -15,6 +15,7 @@ if (!function_exists('config')) {
                 "DB_DATABASE" => $_ENV['DB_DATABASE'],
                 "DB_PASSWORD" => $_ENV['DB_PASSWORD'],
                 "APP_NAME" => $_ENV['APP_NAME'],
+                "JWT_KEY" => $_ENV['JWT_KEY'],
                 "APP_USER_MODEL" => $_ENV['APP_USER_MODEL']??'users',
             ];
         if (!array_key_exists($key, $configs)) {

@@ -23,7 +23,7 @@ composer install
  ```
 
 ```sh
-Create a .env file in the root of of the app, copy and paste .env.example placeholders
+Create a .env file in the root of the app, copy and paste .env.example placeholders INTO .env
 Update your app credentials in .env
 ```
 

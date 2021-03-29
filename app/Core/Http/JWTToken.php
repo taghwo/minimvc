@@ -5,9 +5,6 @@ use Firebase\JWT\JWT;
 
 class JWTToken
 {
-
-    private static $secretKey = "JHGFHJDGii0GFJSGDUUERYU2323";
-
     public static function createUserToken($userData){
 
 
@@ -29,7 +26,7 @@ class JWTToken
         );
 
         try {
-            $jwt = JWT::encode($payload, self::$secretKey);
+            $jwt = JWT::encode($payload, config("JWT_KEY"));
             return $jwt;
         }catch(\Exception $e){
              echo $e;
@@ -38,7 +35,7 @@ class JWTToken
 
     public static function validateToken($token){
         try {
-           JWT::decode($token, self::$secretKey,array('HS256'));
+           JWT::decode($token, config("JWT_KEY"),array('HS256'));
             return true;
         }catch(\Exception $e){
             return false;

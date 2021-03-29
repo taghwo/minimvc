@@ -7,9 +7,10 @@ Composer
 MYSQL 5.5^
 ```
 
-# iNSTALLATION
+# INSTALLATION
 ```sh
 Clone repository
+https://github.com/taghwo/minimvc.git
 ```
 ```sh
 composer install
@@ -20,12 +21,12 @@ composer install
  ```
 
 ```sh
-Create a .env file in the root of of the app, copy and paste .env.example placeholders
+Create an .env file in the root of of the app, copy and paste .env.example placeholders
 Update your app credentials in .env
 ```
 
 ```sh
-Modify boom permissions
+Modify boom file permissions
 chmod +x boom
 ```
 ```sh

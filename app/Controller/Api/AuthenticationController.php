@@ -8,6 +8,11 @@ class AuthenticationController extends BaseController
 {
     use Authenticator;
 
+    /**
+     * Get current auth user
+     *
+     * @return response
+     */
     public function currentuser()
     {
         if ($this->session()->check()) {
@@ -16,6 +21,11 @@ class AuthenticationController extends BaseController
         return $this->response_error('Sorry you are not logged in', 401);
     }
 
+    /**
+     * logout and end session
+     *
+     * @return response
+     */
     public function logout()
     {
         $this->session()->end();

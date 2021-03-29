@@ -4,8 +4,18 @@ namespace App\Core\Http;
 
 class Request
 {
+    /**
+     * Holds array key pairs for post data
+     *
+     * @var array
+     */
     protected $requestStack;
 
+    /**
+     * Get server request path
+     *
+     * @return string
+     */
     public function getPath()
     {
         $path = $_SERVER['REQUEST_URI']??'/';
@@ -15,6 +25,12 @@ class Request
         }
         return $path;
     }
+
+    /**
+     * Get server request method
+     *
+     * @return string
+     */
     public function getParams()
     {
         $params = explode('/', $this->getPath());
@@ -26,6 +42,11 @@ class Request
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
+    /**
+     * Get post request body
+     *
+     * @return object
+     */
     public function body()
     {
         $entityBody = file_get_contents('php://input');
@@ -36,7 +57,12 @@ class Request
         return json_decode($entityBody);
     }
 
-    public function input($field)
+    /**
+     * Get formatted post request body
+     * @return string $field
+     * @return string
+     */
+    public function input(string $field)
     {
         $this->body();
         return $this->requestStack[$field];

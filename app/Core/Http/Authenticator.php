@@ -8,33 +8,75 @@ use App\Models\User;
 
 trait Authenticator
 {
+    /**
+     *
+     * @var arraay
+     */
     private $requestUser;
+    /**
+     *
+     * @var string
+     */
     protected $validationColumn = 'email';
 
-    public function authAttempt($data)
+    /**
+     *
+     * @var string
+     */
+    protected $invalidCredential = 'Invalid credentials';
+    /**
+     *
+     * @var integer
+     */
+    protected $invalidCredentialCode = 401;
+
+    /**
+     * Validated supplied credentials against database
+     *
+     * @param array $data
+     * @return json | Object
+     */
+    public function authAttempt(array $data)
     {
-        $this->getUserBasedOnEmail($data['email']);
+        $this->getUserBasedOnValidationColumn($data[$this->validationColumn]);
 
         if (Hash::check($data['password'], $this->requestUser->password)) {
             unset($this->requestUser->password);
             return $this->requestUser;
         } else {
-            die(Response::json(['status'=>'failed','message'=>'Invalid credentials'], 401));
+            die(Response::json(['status'=>'failed','message'=>$this->invalidCredential], $this->invalidCredentialCode));
         }
     }
 
-    protected function loginUser($user)
+    /**
+     * Start session for authenticated user
+     *
+     * @param object $user
+     * @return void
+     */
+    protected function loginUser(object $user)
     {
         $session = new Session();
         $session->authstart($user);
     }
 
+    /**
+     * Load authenticated user
+     *
+     * @return object
+     */
     public function getRequestUser()
     {
         return $this->requestUser;
     }
 
-    private function getUserBasedOnEmail($value)
+     /**
+     * Fetch request user based on validation column and value
+     *
+     * @param string $value
+     * @return void | json
+     */
+    private function getUserBasedOnValidationColumn(string $value)
     {
         $user = new User();
         $user->hidden([]);
@@ -45,6 +87,6 @@ trait Authenticator
             return;
         }
 
-        die(Response::json(['status'=>'failed','message'=>'Invalid credentials'], 401));
+        die(Response::json(['status'=>'failed','message'=>$this->invalidCredential], $this->invalidCredentialCode));
     }
 }

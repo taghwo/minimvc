@@ -24,7 +24,11 @@ class Database
 
         $this->conn = $this->initConnection();
     }
-
+    /**
+     * Init databse connection
+     *
+     * @return mixed
+     */
     private function initConnection()
     {
         try {
@@ -35,6 +39,13 @@ class Database
         }
     }
 
+    /**
+     * Init SQL
+     *
+     * @param string $sql
+     * @param array $data
+     * @return void
+     */
     public function query($sql, $data=[])
     {
         $this->stmt = $this->prepare($sql);
@@ -46,17 +57,33 @@ class Database
         }
     }
 
+    /**
+     * Prepare SQL
+     *
+     * @param string $sql
+     * @return object
+     */
     private function prepare($sql)
     {
         return $this->conn->prepare($sql);
     }
 
-    public function createTable($table)
+    /**
+     * Create new table
+     *
+     * @param string $table
+     * @return response
+     */
+    public function createTable(string $table)
     {
         $this->execute();
         echo "{$table} table created successfully";
     }
 
+    /**
+     * execute pdo query
+     * @param void
+    */
     private function execute($param=[])
     {
         if (empty($param)) {
@@ -66,23 +93,41 @@ class Database
         }
     }
 
+    /**
+     * Fetch many results
+     *
+     * @return object
+     */
     public function resultSet()
     {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
+     /**
+     * Insert new model object
+     *
+     * @return int
+     */
     public function insert()
     {
         $this->execute();
         return $this->conn->lastInsertId();
     }
 
+     /**
+     * Fetch single result
+     *
+     * @return object
+     */
     public function fetchSingle($param)
     {
         $this->execute($param);
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
+    /**
+     * Close database connection
+     */
     public function __destruct()
     {
         $this->conn = null;

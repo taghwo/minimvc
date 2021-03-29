@@ -12,12 +12,22 @@ class RegisterController extends BaseController
 {
     use Authenticator;
 
+    /**
+     *
+     * @var object
+     */
     protected $user;
     public function __construct()
     {
         $this->user = new User();
     }
 
+    /**
+     * Register user
+     *
+     * @param Request $request
+     * @return response
+     */
     public function register(Request $request)
     {
         $validator = new Validation();

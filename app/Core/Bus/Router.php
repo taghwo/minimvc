@@ -8,13 +8,10 @@ use RuntimeException;
 
 class Router
 {
-    // core/Helpers.php","core/Config.php"
-    protected $reflection;
     protected $request;
     protected $response;
     protected $path;
     protected $paths;
-    protected $prefix;
     protected $route;
     public function __construct(Request $request, Response $response)
     {

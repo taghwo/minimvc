@@ -6,12 +6,23 @@ use App\Core\Bus\Session;
 
 abstract class BaseController
 {
+    /**
+     * Make available session to controllers
+     *
+     * @return object
+     */
     public function session()
     {
-        $sesion = new Session();
-        return $sesion;
+        $session = new Session();
+        return $session;
     }
 
+    /**
+     * Response ok
+     *
+     * @param mixed $data
+     * @return json
+     */
     public function response_ok($data)
     {
         return Response::json([
@@ -20,7 +31,13 @@ abstract class BaseController
         ], 200);
     }
 
-    public function response_no_data($msg)
+    /**
+     * Response okay but send only message
+     *
+     * @param string $msg
+     * @return json
+     */
+    public function response_no_data(string $msg)
     {
         return Response::json([
             'status' => 'success',
@@ -28,7 +45,14 @@ abstract class BaseController
         ], 200);
     }
 
-    public function response_error($msg, $code=417)
+    /**
+     * Response error
+     *
+     * @param mixed $data
+     * @param integer $code
+     * @return json
+     */
+    public function response_error(string $msg, $code=417)
     {
         return Response::json([
             'status' => 'failed',
@@ -36,7 +60,14 @@ abstract class BaseController
         ], $code);
     }
 
-    public function response_created($data, $message)
+    /**
+     * Response created
+     *
+     * @param mixed $data
+     * @param string $msg
+     * @return json
+     */
+    public function response_created($data, string $message)
     {
         return Response::json([
             'status' => 'success',
@@ -44,13 +75,23 @@ abstract class BaseController
             'data' => $data
         ], 201);
     }
-    public function response_client_error($error)
+
+    /**
+     * Response error
+     *
+     * @param string $error
+     * @param integer $code
+     * @return json
+     */
+    public function response_client_error(string $error)
     {
         return Response::json([
             'status' => 'success',
             'message' => "There was an error {$error}"
         ], 400);
     }
+
+
     protected function view($view, $data=[])
     {
         foreach ($data as $key => $value) {

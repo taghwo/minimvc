@@ -4,8 +4,19 @@ namespace App;
 use App\Core\Bus\Database;
 class Migrations
 {
+    /**
+     *
+     * @var object
+     */
     protected static $db;
-    public static function run($selectedTable)
+
+    /**
+     * Run migrations
+     *
+     * @param string $selectedTable
+     * @return response
+     */
+    public static function run(string $selectedTable)
     {
         $db = new Database();
 
@@ -19,6 +30,11 @@ class Migrations
         }
     }
 
+    /**
+     * Create table schemas
+     *
+     * @return array
+     */
     private static function schemas(){
        return [
             'users' => "CREATE TABLE users(

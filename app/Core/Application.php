@@ -8,9 +8,22 @@ use App\Core\Http\Response;
 
 class Application
 {
+    /**
+     *
+     * @var object
+     */
     public $router;
+    /**
+     *
+     * @var object
+     */
     public $response;
+    /**
+     *
+     * @var object
+     */
     public $request;
+
     public function __construct()
     {
         $this->request = new Request();
@@ -18,6 +31,11 @@ class Application
         $this->router = new Router($this->request, $this->response);
     }
 
+    /**
+     * Initialise router
+     *
+     * @return response
+     */
     public function run()
     {
         echo $this->router->resolve();

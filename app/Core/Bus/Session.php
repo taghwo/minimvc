@@ -3,7 +3,17 @@ namespace App\Core\Bus;
 
 class Session
 {
+    /**
+     *
+     * @var object
+     */
     protected $user;
+
+    /**
+     * Login status
+     *
+     * @var bool
+     */
     public $isLoggedIn;
 
     public function __construct()
@@ -12,25 +22,30 @@ class Session
             session_start();
         }
     }
-
-    public function authstart($user)
+    /**
+     * Push user object into session
+     *
+     * @param object $user
+     * @return void
+     */
+    public function authstart(object $user)
     {
         $_SESSION['isLoggedIn'] = true;
         $_SESSION['user'] =  $user;
     }
 
-    public function user()
+    public function user():object
     {
         return $_SESSION['user'];
     }
 
-    public function userId()
+    public function userId():int
     {
         return (int)$_SESSION['user']->id;
     }
 
 
-    public function check()
+    public function check():bool
     {
         if (!isset($_SESSION['isLoggedIn'])) {
             return false;
@@ -41,7 +56,7 @@ class Session
         }
     }
 
-    public function end()
+    public function end():void
     {
         $_SESSION['isLoggedIn'] = false;
         session_destroy();

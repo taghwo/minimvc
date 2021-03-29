@@ -10,6 +10,12 @@ class LoginController extends BaseController
 {
     use Authenticator;
 
+    /**
+     * Login user
+     *
+     * @param Request $request
+     * @return response
+     */
     public function login(Request $request)
     {
         $validator = new Validation();

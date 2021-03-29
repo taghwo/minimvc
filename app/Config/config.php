@@ -2,6 +2,10 @@
 $dotenv = \Dotenv\Dotenv::createImmutable(APP_ROOT('.'));
 $dotenv->load();
 
+/**
+ * Load env configurations and return $key
+ * @param string $key
+ */
 if (!function_exists('config')) {
     function config($key)
     {

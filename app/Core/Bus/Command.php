@@ -1,21 +1,53 @@
 <?php
 namespace App\Core\Bus;
 
+use Closure;
+
 class Command
 {
+    /**
+     * Hold all commands taht have been registered
+     *
+     * @var array
+     */
     protected $commandBag;
+
+    /**
+     *
+     * @var string
+     */
     protected $command;
-    public function register($command, $callback)
+
+    /**
+     * Regsister a new command
+     *
+     * @param string $command
+     * @param Closure $callback
+     * @return void
+     */
+    public function register(string $command, Closure $callback)
     {
         $this->commandBag[$command] = $callback;
     }
 
 
-    public function getCommand($command)
+    /**
+     * Get command
+     *
+     * @param string $command
+     * @return Callback | boolean
+     */
+    public function getCommand(string $command)
     {
         return  $this->commandBag[$command]??null;
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param array $argv
+     * @return void
+     */
     public function fire($argv)
     {
 

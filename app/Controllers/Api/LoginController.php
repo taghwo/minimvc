@@ -21,7 +21,7 @@ class LoginController extends BaseController
     public function login(Request $request)
     {
 
-        $validatedAttr =  $this->validateDate($request);
+        $validatedAttr =  $this->validateData($request);
 
         if ($user = $this->authAttempt($validatedAttr)) {
 
@@ -37,7 +37,7 @@ class LoginController extends BaseController
         return $this->response_ok($payload, "Logged in succesfully");
     }
 
-    public function validateDate($request){
+    public function validateData($request){
         $validator = new Validation();
         $validator->make(
             [

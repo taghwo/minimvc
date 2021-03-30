@@ -56,7 +56,7 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 
  # endpoints
 ```sh
- All enpoints reside in route.php file
+ All endpoints reside in Route/api.php
 ```
 
 ```sh

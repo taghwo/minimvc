@@ -5,6 +5,6 @@ use App\Core\Application;
 
 $app = new Application();
 
-require_once __DIR__.'/../app/Route.php';
+require_once __DIR__.'/../Route/api.php';
 
 $app->run();

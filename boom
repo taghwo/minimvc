@@ -2,7 +2,7 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
 use App\Core\Bus\Command;
-use App\Migrations;
+use Database\Migrations;
 
 $command = new Command();
 

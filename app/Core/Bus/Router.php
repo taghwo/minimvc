@@ -5,7 +5,9 @@ namespace App\Core\Bus;
 use App\Core\Exceptions\GlobalException;
 use App\Core\Http\Request;
 use RuntimeException;
-
+use TRegx\CleanRegex\Pattern;
+use TRegx\CleanRegex\Match\Details\Detail;
+use TRegx\CleanRegex\Match\Details\NotMatched;
 class Router
 {
     protected $request;
@@ -39,7 +41,7 @@ class Router
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
         $this->callback = $this->paths[$method][$path]??false;
-        if (!$this->callback) {
+        if (!$this->callback) { 
             $methodToUpper = strtoupper($method);
             throw new RuntimeException("The  {$methodToUpper} request for {$this->request->getPath()} did not match any route.");
         }

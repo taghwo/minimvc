@@ -108,8 +108,8 @@ abstract class BaseController
         foreach ($data as $key => $value) {
             $$key = $value;
         }
-        if (file_exists("../app/Views/{$view}.php")) {
-            require_once "../app/Views/{$view}.php";
+        if (file_exists("../Views/{$view}.php")) {
+            require_once "../Views/{$view}.php";
         } else {
             throw new GlobalException('View{$view}.php was not found, please create it');
         }

@@ -12,6 +12,9 @@ class LoginController extends BaseController
 {
     use Authenticator;
 
+    public function about($id){
+        echo $id;
+    }
     /**
      * Login user
      *

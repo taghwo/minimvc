@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace Database;
 
 use App\Core\Bus\Database;
 class Migrations
